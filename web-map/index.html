@@ -1,0 +1,67 @@
+<head>
+  <title>A Demo WebMap</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="mapid" style="width: 600px; height: 400px;"></div>
+<script type="text/javascript">
+    // Initialize the map (without adding a default tile layer)
+var myMap = L.map('mapid').setView([45.4192857, -75.6973237], 13);
+
+// Define layers
+// Base layer from OpenStreetMap  
+var openStreetMapLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: 'Maptiles &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+});
+openStreetMapLayer.addTo(myMap);
+
+/*    
+    var geojsonData = {
+   "type": "FeatureCollection",
+   "features": [
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [-75.6973237, 45.4192857]
+    },
+    "properties": {
+    "Label":"Centre of our map!"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -75.699222, 45.4275 ]
+    },
+    "properties": {
+    "Label":"Not the centre of the map "
+    }
+  }
+]
+};
+
+var dataLayer = L.geoJson(geojsonData, {
+  onEachFeature: function(feature, featureLayer) {
+    featureLayer.bindPopup(feature.properties.Label);
+  }
+}).addTo(myMap);
+*/
+    // load a GeoJSON from external file
+$.getJSON("point-data.geojson", function(data) {
+  // add GeoJSON layer to the map once the file is loaded
+  var datalayer = L.geoJson(data ,{
+  onEachFeature: function(feature, featureLayer) {
+  featureLayer.bindPopup(feature.properties.Label);
+  }
+}).addTo(myMap);
+});
+    </script>
+</body>
+</html>
