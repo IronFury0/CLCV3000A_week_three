@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<head>
+  <title>A Demo WebMap</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div id="mapid" style="width: 600px; height: 400px;"></div>
+<script type="text/javascript">
+
+    // Define tile layers
+var openStreetMapLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }),
+  
+satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 18,
+        attribution: '&copy; Esri'
+}),
+    
+ historical1912 = L.tileLayer('https://mapwarper.net/maps/tile/65528/{z}/{x}/{y}.png', {
+    attribution: '1912',
+    opacity: 0.7
+  }),
+  historical1854 = L.tileLayer('https://mapwarper.net/maps/tile/61034/{z}/{x}/{y}.png', {
+    attribution: '1854',
+    opacity: 0.7
+  });
+
+    // Define layer groups
+var baseMaps = {
+  "OpenStreetMap": openStreetMapLayer,
+  "Satellite": satellite
+  };
+
+var overlayMaps = {
+  "1912": historical1912,
+  "1854": historical1854
+};
+
+    // Initialize map with default layer
+var myMap = L.map('mapid', {
+  center: [45.0234145,-75.7332823],
+  zoom: 13,
+  layers: [openStreetMapLayer] // Start with OpenStreetMap as default
+});
+
+var pointsOBJ =  {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          [
+            -75.73334192003274,
+            45.023490176945984
+          ],
+          [
+            -75.73310001072826,
+            45.023308570870626
+          ],
+          [
+            -75.73293698489181,
+            45.023419552429544
+          ],
+          [
+            -75.73317288402785,
+            45.023601158153326
+          ],
+          [
+            -75.73334116876194,
+            45.02348911492382
+          ]
+        ],
+        "type": "LineString"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID:NRMC-02": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -75.73312827506257,
+          45.02335318863726
+        ],
+        "type": "Point"
+      },
+      "id": 1
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID:NRMC-03": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -75.73313670692342,
+          45.02336523778828
+        ],
+        "type": "Point"
+      },
+      "id": 2
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID:NRMC-04": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -75.73314731511172,
+          45.023361116084004
+        ],
+        "type": "Point"
+      },
+      "id": 3
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID:NRMC-05": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -75.73315275630392,
+          45.02337892449941
+        ],
+        "type": "Point"
+      },
+      "id": 4
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID:NRMC-01": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -75.73305749405031,
+          45.02338803715844
+        ],
+        "type": "Point"
+      },
+      "id": 5
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID:NRMC-15": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -75.73328987298864,
+          45.02348755496024
+        ],
+        "type": "Point"
+      },
+      "id": 6
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID:NRMC-14": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -75.73317207267151,
+          45.02358459517296
+        ],
+        "type": "Point"
+      },
+      "id": 7
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID:NRMC-13": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -75.73316748807004,
+          45.023572713455025
+        ],
+        "type": "Point"
+      },
+      "id": 8
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID:NRMC-12": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -75.73318718331399,
+          45.023565396445235
+        ],
+        "type": "Point"
+      },
+      "id": 9
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID:NRMC-11": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -75.73317941499873,
+          45.023557831385574
+        ],
+        "type": "Point"
+      },
+      "id": 10
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID:NRMC-06": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -75.73305862148656,
+          45.02341665265823
+        ],
+        "type": "Point"
+      },
+      "id": 11
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID:NRMC-07": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -75.73310663768011,
+          45.0234229579595
+        ],
+        "type": "Point"
+      },
+      "id": 12
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID:NRMC-10": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -75.73314167851224,
+          45.02345808322792
+        ],
+        "type": "Point"
+      },
+      "id": 13
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID:NRMC-08": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -75.73305285050293,
+          45.02348021540644
+        ],
+        "type": "Point"
+      },
+      "id": 14
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID:NRMC-09": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -75.73308419041996,
+          45.023507765412916
+        ],
+        "type": "Point"
+      },
+      "id": 15
+    }
+  ]
+};
+
+var geojsonLayer = L.geoJSON(geojsonData, {
+  style: function (feature) {
+    if (feature.geometry.type === "LineString") {
+      return { color: "red", weight: 3 };
+    }
+  },
+  pointToLayer: function (feature, latlng) {
+    return L.circleMarker(latlng, {
+      radius: 6,
+      fillColor: "blue",
+      color: "#000",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.8
+    });
+  },
+  onEachFeature: function (feature, layer) {
+    if (feature.properties) {
+      layer.bindPopup(JSON.stringify(feature.properties));
+    }
+  }
+}).addTo(myMap);
+
+// Zoom to the features
+myMap.fitBounds(geojsonLayer.getBounds());
+
+</script>
+</body>
+</html>

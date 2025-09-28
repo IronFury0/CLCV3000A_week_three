@@ -18,7 +18,14 @@ var openStreetMapLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}
     maxZoom: 18,
     attribution: 'Maptiles &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 });
+
+    var historicalLayer = L.tileLayer('https://mapwarper.net/maps/tile/97437/{z}/{x}/{y}.png', {
+    maxZoom: 18
+});
+
+    
 openStreetMapLayer.addTo(myMap);
+historicalLayer.addTo(myMap);
 
 /*    
     var geojsonData = {
